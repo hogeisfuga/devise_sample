@@ -12,7 +12,7 @@
 
   <body>
     <header>
-      <% if user_signed_in? %>
+      <% if admin_staff_signed_in? %>
         <%= link_to "ログアウト", destroy_admin_staff_session_path, method: :delete %>
       <% else %>
         <%= link_to "ログイン", new_admin_staff_session_path %>

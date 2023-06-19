@@ -1,23 +1,14 @@
 Rails.application.routes.draw do
   namespace :admin do
-    # パスとアクション両方にusersをつけたいのでこう書く
-    namespace :staffs do
-      # devise_forについてわからなくなった時は以下参照
-      # https://www.rubydoc.info/github/heartcombo/devise/main/ActionDispatch/Routing/Mapper%3Adevise_for
-      devise_for :staffs, path: ''
-    end
+    # moduleを渡すとコントローラがmodule/pathとなる
+    # https://github.com/heartcombo/devise/blob/ec0674523e7909579a5a008f16fb9fe0c3a71712/lib/devise/mapping.rb#L131
+    devise_for :staffs, module: "admin/staffs"
     root to: 'home#top'
   end
 
   # パスとアクション両方にusersをつけたいのでこう書く
-  namespace :users do
-    devise_for :users, path: ''
-  end
+  devise_for :users, module: "users"
 
-  # 必要に応じてオーバーライドしたい場合はアクションを書いていく
-  # devise_for :users, controllers: {
-  #   sessions: 'users/sessions'
-  # }
   get 'dashboard' => 'dashboard#index'
   root to: 'home#top'
   # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
